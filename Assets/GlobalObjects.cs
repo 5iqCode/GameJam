@@ -5,4 +5,5 @@ using UnityEngine;
 public class GlobalObjects : MonoBehaviour
 {
     public GameObject InformationInventoryItem;
+    public GameObject InventoryWindow;
 }

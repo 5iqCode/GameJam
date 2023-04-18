@@ -7,11 +7,12 @@ public class ItemInformation : MonoBehaviour, IPointerEnterHandler, IPointerExit
 {
     public GameObject _informationItem;
 
-    [SerializeField] private SpawnMenuItems _spawnMenuItems;
+    [SerializeField] private InventoryController _inventoryController;
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        _spawnMenuItems.InstantiateMenu();
+        _inventoryController = GameObject.Find("InventoryController").GetComponent<InventoryController>();
+        _inventoryController.ClickItem(name, transform.position);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

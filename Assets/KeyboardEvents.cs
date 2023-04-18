@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class KeyboardEvents : MonoBehaviour
 {
-    [SerializeField] private GameObject _inventoryWindow;
+     private GameObject _inventoryWindow;
 
     private MouseRotate mouseRotate;
 
@@ -14,6 +14,7 @@ public class KeyboardEvents : MonoBehaviour
 
     private void Awake()
     {
+        _inventoryWindow = GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>().InventoryWindow;
         mouseRotate = GetComponent<MouseRotate>();
     }
 
@@ -21,6 +22,7 @@ public class KeyboardEvents : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.I)|| Input.GetKeyDown(KeyCode.Tab))
         {
+            _inventoryWindow = GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>().InventoryWindow;
             if (_inventoryWindow.activeSelf)
             {
                 _inventoryWindow.SetActive(false);
@@ -64,6 +66,7 @@ public class KeyboardEvents : MonoBehaviour
             {
                 Item temp = Resources.Load<Item>("Inventory/" + _closestObject.name);
                 _inventoryWindow.GetComponent<InventoryManager>().AddItem(temp);
+                _inventoryWindow.GetComponent<InventoryWindow>().Redraw();
                 Destroy(_closestObject);
 
             }

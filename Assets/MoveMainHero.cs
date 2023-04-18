@@ -13,13 +13,18 @@ public class MoveMainHero : MonoBehaviour
     [SerializeField] private float _gravity = -9.81f;
     [SerializeField] private float _jumpHeight = 3;
 
-    [SerializeField] private EnduranceController _enduranceController;
+     private EnduranceController _enduranceController;
 
     private Vector3 _velocity;
 
     private float _enduranceValue = 100;
 
     private bool _canRun = true;
+
+    private void Start()
+    {
+        _enduranceController = GameObject.Find("EnduranceController").GetComponent<EnduranceController>();
+    }
 
     private void Update()
     {
