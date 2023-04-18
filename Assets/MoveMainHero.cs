@@ -13,7 +13,13 @@ public class MoveMainHero : MonoBehaviour
     [SerializeField] private float _gravity = -9.81f;
     [SerializeField] private float _jumpHeight = 3;
 
+    [SerializeField] private EnduranceController _enduranceController;
+
     private Vector3 _velocity;
+
+    private float _enduranceValue = 100;
+
+    private bool _canRun = true;
 
     private void Update()
     {
@@ -28,20 +34,70 @@ public class MoveMainHero : MonoBehaviour
 
         Vector3 _movement = _transformMainHero.right * moveHorizontal + _transformMainHero.forward * moveVertical;
 
-        _controller.Move(_movement * _speed * Time.deltaTime);
+        Debug.Log(_canRun);
+
+        if ((Input.GetKey(KeyCode.LeftShift))&& isGrounded)
+        {
+            if (_canRun == true)
+            {
+                _controller.Move(_movement * _speedUp * Time.deltaTime);
+            }
+            else
+            {
+                    _controller.Move(_movement * _speed/1.5f * Time.deltaTime);
+                
+                tiredHero();
+            }
+            
+        }
+        else
+        {
+            if (_canRun)
+            {
+                _controller.Move(_movement * _speed * Time.deltaTime);
+            }
+            else
+            {
+                _controller.Move(_movement * _speed / 1.5f * Time.deltaTime);
+            }
+        }
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            _velocity.y = Mathf.Sqrt(_jumpHeight * -2f * _gravity);
+            if (_enduranceValue > 15)
+            {
+                _velocity.y = Mathf.Sqrt(_jumpHeight * -2f * _gravity);
+
+                _enduranceController.MinusEnduranceIfJump();
+            }
+            else
+            {
+                tiredHero();
+            }
+            
         }
 
         _velocity.y += _gravity * Time.deltaTime;
 
         _controller.Move(_velocity * Time.deltaTime);
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+
+        _enduranceValue = _enduranceController.RecoveryEndurance(moveHorizontal, moveVertical, Input.GetKey(KeyCode.LeftShift),_canRun);
+
+        if (_canRun && _enduranceValue < 3)
         {
-            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+            _canRun = false;
         }
+        if(_canRun==false && _enduranceValue > 15)
+        {
+            _canRun = true;
+        }
+
+
+    }
+
+    private void tiredHero()
+    {
+        Debug.Log("”—“¿À!!!!!!");
     }
 }

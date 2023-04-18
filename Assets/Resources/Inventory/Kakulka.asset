@@ -18,3 +18,6 @@ MonoBehaviour:
   HungryIfEat: 2
   WaterIfEat: 2
   HPIfEat: 8
+  MenuObject:
+  - {fileID: 2975712314526310694, guid: 5c44cf61262353f4da26e6e6337c97e7, type: 3}
+  - {fileID: 1583342830446366064, guid: ad8c5d14fa79c604faaddf803bdeb9ee, type: 3}

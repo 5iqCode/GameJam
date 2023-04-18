@@ -12,4 +12,6 @@ public class Item : ScriptableObject
     public int HungryIfEat;
     public int WaterIfEat;
     public int HPIfEat; //?
+
+    public GameObject[] MenuObject;
 }
