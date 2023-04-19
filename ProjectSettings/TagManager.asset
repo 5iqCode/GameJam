@@ -8,6 +8,8 @@ TagManager:
   - DontDestroyMainHero
   - DontDestroyInterface
   - DontDestroyInventory
+  - LivingCorpse
+  - Chest
   layers:
   - Default
   - TransparentFX
