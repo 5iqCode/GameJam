@@ -7,7 +7,8 @@ public class InventoryController : MonoBehaviour
 {
     [SerializeField] private GameObject _menuItem;
     [SerializeField] private GameObject _menuFeed;
-
+    [SerializeField] private GameObject _menuChest;
+    [SerializeField] private GameObject _menuFromChest;
 
     [SerializeField] private GameObject _parentMenu;
 
@@ -19,9 +20,10 @@ private Transform _mainHeroTransform;
 
     private GameObject _tempMenu;
 
-  [SerializeField]  private GameObject _menuChest;
+
 
     private string _selectedItemName;
+    private GameObject _selectedGameObject;
 
     [SerializeField] private Slider _sliderWater;
     [SerializeField] private Slider _sliderHungry;
@@ -34,32 +36,50 @@ private Transform _mainHeroTransform;
     private void Start()
     {
         _GlobalObjects = GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>();
+        _inventoryWindowChest = _GlobalObjects.InventoryWindowChest.GetComponent<InventoryWindowChest>();
     }
     private void OnLevelWasLoaded(int level)
     {
         _GlobalObjects = GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>();
     }
 
-    public void ClickItem(string name, Vector3 _position)
+    public void ClickItem(string name, Vector3 _position,GameObject gameObject)
     {
+        GameObject[] _menuObjs = GameObject.FindGameObjectsWithTag("MenuItem");
+        if(_menuObjs.Length > 0)
+        {
+            for(int i =0; i < _menuObjs.Length; i++)
+            {
+                Destroy(_menuObjs[i]);
+            }
+        }
         if (_GlobalObjects.IsGiveEatToLivingCorpse)
         {
             _tempMenu = Instantiate(_menuFeed, _position, Quaternion.identity, _parentMenu.transform);
         }
         else if (_GlobalObjects.IsUseChest)
         {
-            _tempMenu = Instantiate(_menuChest, _position, Quaternion.identity, _parentMenu.transform);
+            if (gameObject.GetComponent<ItemInformation>().IsChest == false)
+            {
+                _tempMenu = Instantiate(_menuChest, _position, Quaternion.identity, _parentMenu.transform);
+            }
+            else
+            {
+                _tempMenu = Instantiate(_menuFromChest, _position, Quaternion.identity, _parentMenu.transform);
+            }
+            
         }
         else
         {
             _tempMenu = Instantiate(_menuItem, _position, Quaternion.identity, _parentMenu.transform);
         }
         _selectedItemName = name;
+        _selectedGameObject = gameObject;
     }
 
     private void Update()
     {
-        if(Input.GetKey(KeyCode.Tab)|| Input.GetKey(KeyCode.I))
+        if(Input.GetKey(KeyCode.Tab)|| Input.GetKey(KeyCode.I) || Input.GetKey(KeyCode.E))
         {
             TryDestroyMenu();
         }
@@ -77,6 +97,10 @@ private Transform _mainHeroTransform;
         _sliderWater.value += temp.WaterIfEat;
 
         _inventoryWindow.Redraw();
+        if (_inventoryWindowChest != null)
+        {
+            _inventoryWindowChest.Redraw();
+        }
 
         TryDestroyMenu();
     }
@@ -123,13 +147,21 @@ private Transform _mainHeroTransform;
     public void OnClickMoveToChest()
     {
         _inventoryWindow = _GlobalObjects.InventoryWindow.GetComponent<InventoryWindow>();
-        _inventoryWindowChest = _GlobalObjects.InventoryWindowChest.GetComponent<InventoryWindowChest>();
         Item temp = Resources.Load<Item>("Inventory/" + _selectedItemName);
-        _inventoryManager._InventoryItems.Remove(temp);
-        _inventoryManager._ChestItems.Add(temp);
+        if (_selectedGameObject.GetComponent<ItemInformation>().IsChest == false)
+        {
+            _inventoryManager._ChestItems.Add(temp);
+            _inventoryManager._InventoryItems.Remove(temp);
+        }
+        else
+        {
+            _inventoryManager._InventoryItems.Add(temp);
+            _inventoryManager._ChestItems.Remove(temp);
+        }
 
         _inventoryWindow.Redraw();
         _inventoryWindowChest.Redraw();
+        TryDestroyMenu();
     }
 
     private void TryDestroyMenu()

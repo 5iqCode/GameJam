@@ -7,12 +7,14 @@ public class ItemInformation : MonoBehaviour, IPointerEnterHandler, IPointerExit
 {
     public GameObject _informationItem;
 
+    public bool IsChest;
+
     [SerializeField] private InventoryController _inventoryController;
 
     public void OnPointerClick(PointerEventData eventData)
     {
         _inventoryController = GameObject.Find("InventoryController").GetComponent<InventoryController>();
-        _inventoryController.ClickItem(name, transform.position);
+        _inventoryController.ClickItem(name, transform.position, eventData.pointerCurrentRaycast.gameObject);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

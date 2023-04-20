@@ -29,7 +29,8 @@ public class InventoryWindowChest : MonoBehaviour
             icon.AddComponent<Image>().sprite = item.IconInInventory;
             icon.transform.SetParent(itemPanel);
 
-            icon.AddComponent<ItemInformation>();
+           ItemInformation itemInformation = icon.AddComponent<ItemInformation>();
+            itemInformation.IsChest = true;
         }
     }
 }

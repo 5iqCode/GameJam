@@ -10,6 +10,7 @@ TagManager:
   - DontDestroyInventory
   - LivingCorpse
   - Chest
+  - MenuItem
   layers:
   - Default
   - TransparentFX

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731715, g: 0.13414735, b: 0.121078536, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -902,9 +902,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _menuItem: {fileID: 2907631179656670221, guid: ef1bd71afe981ce4da7e103173b8a6bd, type: 3}
   _menuFeed: {fileID: 2907631179656670221, guid: 7fc3e1d00b99b83408a569b13d2576f6, type: 3}
+  _menuChest: {fileID: 2907631179656670221, guid: a73a914a31f13b74fb7a022b617151ad, type: 3}
+  _menuFromChest: {fileID: 2907631179656670221, guid: 423c4c6672faad24db6b2effca48e10c, type: 3}
   _parentMenu: {fileID: 309515837}
   _inventoryManager: {fileID: 1852122074}
-  _menuChest: {fileID: 2907631179656670221, guid: a73a914a31f13b74fb7a022b617151ad, type: 3}
   _sliderWater: {fileID: 1360072444}
   _sliderHungry: {fileID: 2127025089}
   _sliderHP: {fileID: 642703191}
@@ -2394,7 +2395,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!224 &903235336
 RectTransform:
@@ -4693,8 +4694,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _InventoryItems: []
   _StartItems: []
-  _ChestItems:
-  - {fileID: 11400000, guid: 4a282ddd3f0bc8844917fb62e7640c23, type: 2}
+  _ChestItems: []
 --- !u!114 &1852122075
 MonoBehaviour:
   m_ObjectHideFlags: 0
