@@ -614,9 +614,9 @@ MonoBehaviour:
   _enduranceSleder: {fileID: 921808887}
   _FillImage: {fileID: 615175623}
   _valueMinusEnduranceJump: 30
-  _valueRecoveryStay: 0.05
-  _valueRecoveryWalk: 0.01
-  _valueMinusEnduranceRun: 0.025
+  _valueRecoveryStay: 20
+  _valueRecoveryWalk: 5
+  _valueMinusEnduranceRun: 10
 --- !u!1 &215856926
 GameObject:
   m_ObjectHideFlags: 0
@@ -749,7 +749,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -91.000015, y: 34}
+  m_AnchoredPosition: {x: -91.000015, y: -23.7}
   m_SizeDelta: {x: 23.6086, y: 17.9464}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &222699219
@@ -1637,7 +1637,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 25.6
+  m_Value: 48.5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2300,7 +2300,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 18.9
+  m_Value: 76.9
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2525,6 +2525,7 @@ GameObject:
   - component: {fileID: 955268755}
   - component: {fileID: 955268754}
   - component: {fileID: 955268758}
+  - component: {fileID: 955268759}
   m_Layer: 0
   m_Name: "Living\u0421orpse"
   m_TagString: LivingCorpse
@@ -2625,6 +2626,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canvasStatusBarsCorpse: {fileID: 1282899134}
   _statusBarsCorpse: {fileID: 1071043137}
+--- !u!114 &955268759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955268753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d397806132613a747b7383988d3dba50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textDayPass: {fileID: 0}
+  _goSleepGameObject: {fileID: 0}
 --- !u!1 &967824238
 GameObject:
   m_ObjectHideFlags: 0
@@ -3023,11 +3038,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aa4d5f924d1f324987acf0c9a02a54d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DaysPass: 0
   InformationInventoryItem: {fileID: 222699219}
   InventoryWindow: {fileID: 1852122073}
   InventoryWindowChest: {fileID: 1234048814}
   IsGiveEatToLivingCorpse: 0
   IsUseChest: 0
+  WasWalk: 0
+  MasLivingCorpse:
+  - 25
+  - 30
+  - 20
 --- !u!1 &1071043137
 GameObject:
   m_ObjectHideFlags: 0
@@ -3562,6 +3583,118 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &1335729672
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1335729676}
+  - component: {fileID: 1335729675}
+  - component: {fileID: 1335729674}
+  - component: {fileID: 1335729673}
+  - component: {fileID: 1335729677}
+  m_Layer: 0
+  m_Name: Bed
+  m_TagString: Bed
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1335729673
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335729672}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1335729674
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335729672}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 24914b5729607124c8003ddeadec7556, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1335729675
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335729672}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1335729676
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335729672}
+  m_LocalRotation: {x: -0, y: -0.75418836, z: -0, w: 0.65665823}
+  m_LocalPosition: {x: 6.5109, y: -4.6, z: 2.36}
+  m_LocalScale: {x: 2.5182, y: 1, z: 5.9573}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: -97.909, z: 0}
+--- !u!114 &1335729677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335729672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d397806132613a747b7383988d3dba50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textDayPass: {fileID: 1006605932854788713, guid: a11c1dd85c49bc448b1b3d5f3a641f66, type: 3}
+  _goSleepGameObject: {fileID: 1006605932854788713, guid: 95d84b0c3ba8f1c418fa10c34979954f, type: 3}
 --- !u!1 &1346387711
 GameObject:
   m_ObjectHideFlags: 0
@@ -4059,6 +4192,7 @@ GameObject:
   - component: {fileID: 1539473050}
   - component: {fileID: 1539473049}
   - component: {fileID: 1539473048}
+  - component: {fileID: 1539473053}
   m_Layer: 5
   m_Name: Interface
   m_TagString: DontDestroyInterface
@@ -4164,6 +4298,32 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1539473053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1539473047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbab02fc8aa2e4042aee26ac9afb8a3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _HPOnAndDayHero: 0
+  _HungryOnAndDayHero: 20
+  _WaterOnAndDayHero: 30
+  _HPOnAndDayLivingCorpse: 10
+  _HungryOnAndDayLivingCorpse: 15
+  _WaterOnAndDayLivingCorpse: 25
+  "_\u0421omplexityMultiplier": 1
+  _PlusComplexityOnNextDay: 0.2
+  _HPSliderHero: {fileID: 642703191}
+  _HungrySliderHero: {fileID: 2127025089}
+  _WaterSliderHero: {fileID: 1360072444}
+  _HPSliderLivingCorpse: {fileID: 891650948}
+  _HungrySliderLivingCorpse: {fileID: 1367786830}
+  _WaterSliderLivingCorpse: {fileID: 1915186953}
 --- !u!1 &1554757372
 GameObject:
   m_ObjectHideFlags: 0
@@ -5488,7 +5648,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -91.000015, y: -26}
+  m_AnchoredPosition: {x: -91.000015, y: 34.8}
   m_SizeDelta: {x: 23.6086, y: 17.9464}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2100781804

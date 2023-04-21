@@ -5,8 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class GoToNewScene : MonoBehaviour
 {
+    private GlobalObjects _globalObjects;
     private void OnTriggerEnter(Collider other)
     {
+        _globalObjects = GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>();
         if ((other.tag == "Player")|| (other.tag == "MainCamera"))
         {
             GameObject _inventoryWindow = GameObject.Find("BgInventoryHero");
@@ -24,16 +26,12 @@ public class GoToNewScene : MonoBehaviour
             if (SceneManager.GetActiveScene().name == "BunkerScene")
             {
                 SceneManager.LoadScene("SampleScene");
-
+                _globalObjects.WasWalk = true;
             }
             else
             {
                 SceneManager.LoadScene("BunkerScene");
             }
-        }
-        else
-        {
-            Destroy(other.gameObject);
         }
             
     }

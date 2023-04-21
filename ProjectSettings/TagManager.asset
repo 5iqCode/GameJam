@@ -11,6 +11,8 @@ TagManager:
   - LivingCorpse
   - Chest
   - MenuItem
+  - Bed
+  - DayPass
   layers:
   - Default
   - TransparentFX

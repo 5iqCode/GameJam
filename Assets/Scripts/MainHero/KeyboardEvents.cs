@@ -11,6 +11,7 @@ public class KeyboardEvents : MonoBehaviour
 
     private GameObject _livingCorpse;
     private GameObject _Chest;
+    private GameObject _Bed;
 
     //TakeBlock
     [SerializeField] private float _takeDistance;// дальность поднятия блока
@@ -37,6 +38,7 @@ public class KeyboardEvents : MonoBehaviour
         {
             _livingCorpse = GameObject.FindGameObjectWithTag("LivingCorpse");
             _Chest = GameObject.FindGameObjectWithTag("Chest");
+            _Bed = GameObject.FindGameObjectWithTag("Bed");
         }
     }
 
@@ -88,6 +90,7 @@ public class KeyboardEvents : MonoBehaviour
         {
             float _distlivingCorpse = Vector3.Distance(_livingCorpse.transform.position, transform.position);
             float _distlivingChest = Vector3.Distance(_Chest.transform.position, transform.position);
+            float _distBed = Vector3.Distance(_Bed.transform.position, transform.position);
             if (_takeDistance > _distlivingCorpse || _takeDistance > _distlivingChest)
             {
                 // ВСПЛЫВАЮЩИЙ ТЕКСТ СЮДА (E для взаимодействия)
@@ -105,6 +108,10 @@ public class KeyboardEvents : MonoBehaviour
 
                     _GlobalObjects.IsUseChest = !_GlobalObjects.IsUseChest;
                     OpenCloseInventory();
+                }
+                if (_takeDistance > _distBed)
+                {
+                    _Bed.GetComponent<BedController>().TryGoSleep();
                 }
             }
             if ((_inventoryChest.activeSelf) && (_takeDistance < _distlivingChest) && (_GlobalObjects.IsUseChest == true)|| (_inventoryWindow.activeSelf) && (_takeDistance < _distlivingCorpse) && (_GlobalObjects.IsGiveEatToLivingCorpse == true))
@@ -135,11 +142,18 @@ public class KeyboardEvents : MonoBehaviour
             }
             if (_takeDistance > _closestDist) // если дистанция поднятия меньше расстояния до ближайшего блока, то его можно поднять
             {
-                Item temp = Resources.Load<Item>("Inventory/" + _closestObject.name);
-                _inventoryWindow.GetComponent<InventoryManager>().AddItem(temp);
-                _inventoryWindow.GetComponent<InventoryWindow>().Redraw();
-                Destroy(_closestObject);
-
+                InventoryManager inventoryManager = _inventoryWindow.GetComponent<InventoryManager>();
+                if (inventoryManager._InventoryItems.Count>=4)
+                {
+                    Debug.Log("Максимум предметов!!!!!!!");
+                }
+                else
+                {
+                    Item temp = Resources.Load<Item>("Inventory/" + _closestObject.name);
+                    inventoryManager.AddItem(temp);
+                    _inventoryWindow.GetComponent<InventoryWindow>().Redraw();
+                    Destroy(_closestObject);
+                }
             }
         }
     }

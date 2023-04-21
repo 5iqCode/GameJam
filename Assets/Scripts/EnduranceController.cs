@@ -42,17 +42,17 @@ public class EnduranceController : MonoBehaviour
         }
         if(_moveX==0 && _moveY == 0)
         {
-            _enduranceSleder.value += _valueRecoveryStay;
+            _enduranceSleder.value += _valueRecoveryStay * Time.deltaTime;
         }
         else
         {
             if (_pressShift&&_canRun)
             {
-                _enduranceSleder.value -= _valueMinusEnduranceRun;
+                _enduranceSleder.value -= _valueMinusEnduranceRun * Time.deltaTime;
             }
             else
             {
-                _enduranceSleder.value += _valueRecoveryWalk;
+                _enduranceSleder.value += _valueRecoveryWalk * Time.deltaTime;
             }
             
         }

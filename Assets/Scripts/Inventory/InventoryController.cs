@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class InventoryController : MonoBehaviour
@@ -37,10 +38,30 @@ private Transform _mainHeroTransform;
     {
         _GlobalObjects = GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>();
         _inventoryWindowChest = _GlobalObjects.InventoryWindowChest.GetComponent<InventoryWindowChest>();
+
+        FindLivingCorpse();
+    }
+    private Slider _sliderWaterCorpse;
+    private Slider _sliderHungryCorpse;
+    private Slider _sliderHPCorpse;
+    private void FindLivingCorpse()
+    {
+        if (SceneManager.GetActiveScene().name == "BunkerScene")
+        {
+
+            _sliderHPCorpse = GameObject.Find("HpSliderCorpse").GetComponent<Slider>();
+            _sliderHungryCorpse = GameObject.Find("HungrySliderCorpse").GetComponent<Slider>();
+            _sliderWaterCorpse = GameObject.Find("WaterSliderCorpse").GetComponent<Slider>();
+
+            _sliderHPCorpse.value = _GlobalObjects.MasLivingCorpse[0];
+            _sliderHungryCorpse.value = _GlobalObjects.MasLivingCorpse[1];
+            _sliderWaterCorpse.value = _GlobalObjects.MasLivingCorpse[2];
+        }
     }
     private void OnLevelWasLoaded(int level)
     {
         _GlobalObjects = GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>();
+        FindLivingCorpse();
     }
 
     public void ClickItem(string name, Vector3 _position,GameObject gameObject)
@@ -122,22 +143,15 @@ private Transform _mainHeroTransform;
 
     public void OnClickFeed()
     {
-        Slider _sliderWaterCorpse;
-        Slider _sliderHungryCorpse;
-        Slider _sliderHPCorpse;
-
-        _sliderHPCorpse = GameObject.Find("HpSliderCorpse").GetComponent<Slider>();
-        _sliderHungryCorpse = GameObject.Find("HungrySliderCorpse").GetComponent<Slider>();
-        _sliderWaterCorpse = GameObject.Find("WaterSliderCorpse").GetComponent<Slider>();
-
     _inventoryWindow = _GlobalObjects.InventoryWindow.GetComponent<InventoryWindow>();
         Item temp = Resources.Load<Item>("Inventory/" + _selectedItemName);
 
         _inventoryManager._InventoryItems.Remove(temp);
+        _GlobalObjects.MasLivingCorpse[0] += temp.HPIfEat;
+        _GlobalObjects.MasLivingCorpse[1] += temp.HungryIfEat;
+        _GlobalObjects.MasLivingCorpse[2] += temp.WaterIfEat;
 
-        _sliderHPCorpse.value += temp.HPIfEat;
-        _sliderHungryCorpse.value += temp.HungryIfEat;
-        _sliderWaterCorpse.value += temp.WaterIfEat;
+        FindLivingCorpse();
 
         _inventoryWindow.Redraw();
 
@@ -155,8 +169,16 @@ private Transform _mainHeroTransform;
         }
         else
         {
-            _inventoryManager._InventoryItems.Add(temp);
-            _inventoryManager._ChestItems.Remove(temp);
+            if(_inventoryManager._InventoryItems.Count < 4)
+            {
+                _inventoryManager._InventoryItems.Add(temp);
+                _inventoryManager._ChestItems.Remove(temp);
+            }
+            else
+            {
+                Debug.Log("меер леярю!!!");
+            }
+            
         }
 
         _inventoryWindow.Redraw();
