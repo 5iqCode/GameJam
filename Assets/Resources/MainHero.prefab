@@ -131,7 +131,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d956b7d9497edd340ba4f2b662e83fdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _inventoryWindow: {fileID: 0}
   _takeDistance: 2
+  _inventoryChest: {fileID: 0}
+  _textPressE: {fileID: 3622513371019910515, guid: aeb9d915087b5d042878fc4fa40afc9c, type: 3}
+  _canvasCantTake: {fileID: 8137991748141794340, guid: 3b45dc3eefb08b246a2c45d7094c9b8f, type: 3}
 --- !u!1 &6511531157140506738
 GameObject:
   m_ObjectHideFlags: 0

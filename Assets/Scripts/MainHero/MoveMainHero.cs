@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MoveMainHero : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class MoveMainHero : MonoBehaviour
     private Vector3 _velocity;
 
     private float _enduranceValue = 100;
+
+    private Slider _enduranceSlider;
 
     private bool _canRun = true;
 
@@ -100,8 +103,9 @@ public class MoveMainHero : MonoBehaviour
 
     }
 
+
     private void tiredHero()
     {
-        Debug.Log("”—“¿À!!!!!!");
+        _enduranceController.TryStartCorountine();
     }
 }

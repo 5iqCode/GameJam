@@ -13,6 +13,7 @@ TagManager:
   - MenuItem
   - Bed
   - DayPass
+  - FillEndurance
   layers:
   - Default
   - TransparentFX

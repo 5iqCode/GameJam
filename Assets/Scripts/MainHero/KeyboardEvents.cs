@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -20,8 +21,15 @@ public class KeyboardEvents : MonoBehaviour
     private GlobalObjects _GlobalObjects;
 
     public GameObject _inventoryChest;
+
+    [SerializeField] private GameObject _textPressE;
+    GameObject _tempTextPressE;
+
+    private Transform _inventoryTransform;
+
     private void Start()
     {
+        _inventoryTransform = GameObject.Find("Inventory").transform;
         _GlobalObjects = GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>();
         _inventoryWindow = _GlobalObjects.InventoryWindow;
 
@@ -91,11 +99,33 @@ public class KeyboardEvents : MonoBehaviour
             float _distlivingCorpse = Vector3.Distance(_livingCorpse.transform.position, transform.position);
             float _distlivingChest = Vector3.Distance(_Chest.transform.position, transform.position);
             float _distBed = Vector3.Distance(_Bed.transform.position, transform.position);
-            if (_takeDistance > _distlivingCorpse || _takeDistance > _distlivingChest)
-            {
-                // ВСПЛЫВАЮЩИЙ ТЕКСТ СЮДА (E для взаимодействия)
-            }
 
+            if ((_takeDistance > _distlivingCorpse || _takeDistance > _distlivingChest|| _takeDistance>_distBed)&&_inventoryWindow.activeSelf==false)
+            {
+                if (_tempTextPressE == null)
+                {
+                    _tempTextPressE = Instantiate(_textPressE, _inventoryTransform);
+                    if (_takeDistance > _distlivingCorpse)
+                    {
+                        _tempTextPressE.GetComponent<TMP_Text>().text = "press E to feed";
+                    } else if(_takeDistance > _distlivingChest)
+                    {
+                        _tempTextPressE.GetComponent<TMP_Text>().text = "press E to open chest";
+                    }
+                    else
+                    {
+                        _tempTextPressE.GetComponent<TMP_Text>().text = "press E to sleep";
+                    }
+                    
+                }
+            }
+            else
+            {
+                if (_tempTextPressE != null)
+                {
+                    Destroy(_tempTextPressE);
+                }
+            }
             if (Input.GetKeyDown(KeyCode.E)|| Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.Tab))
             {
                 if (_takeDistance > _distlivingCorpse)
@@ -145,7 +175,7 @@ public class KeyboardEvents : MonoBehaviour
                 InventoryManager inventoryManager = _inventoryWindow.GetComponent<InventoryManager>();
                 if (inventoryManager._InventoryItems.Count>=4)
                 {
-                    Debug.Log("Максимум предметов!!!!!!!");
+                    CantTakeSoMuch(_closestObject);
                 }
                 else
                 {
@@ -156,5 +186,11 @@ public class KeyboardEvents : MonoBehaviour
                 }
             }
         }
+    }
+    [SerializeField] private GameObject _canvasCantTake;
+    private void CantTakeSoMuch(GameObject _closedObj)
+    {
+        GameObject gameObject = Instantiate(_canvasCantTake, _closedObj.transform);
+
     }
 }

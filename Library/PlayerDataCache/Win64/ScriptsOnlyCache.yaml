@@ -1,6 +1,7 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - BedController
     - DontDestroyInLoadInterface
     - DontDestroyInLoadInventory
     - EnduranceController
@@ -18,6 +19,7 @@ ScriptsOnlyBuild:
     - MoveMainHero
     - RotateStatusBars
     - SpawnMainHero
+    - StatusBarsController
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.TextMeshPro.dll:
@@ -132,6 +134,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
+    - Class: 49
+      Script: {instanceID: 0}
     - Class: 54
       Script: {instanceID: 0}
     - Class: 65
@@ -147,57 +151,71 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1584}
     - Class: 114
-      Script: {instanceID: 2566}
+      Script: {instanceID: 1664}
     - Class: 114
-      Script: {instanceID: 2640}
+      Script: {instanceID: 2158}
     - Class: 114
-      Script: {instanceID: 2770}
+      Script: {instanceID: 2568}
     - Class: 114
-      Script: {instanceID: 3044}
+      Script: {instanceID: 2642}
     - Class: 114
-      Script: {instanceID: 3136}
+      Script: {instanceID: 2668}
     - Class: 114
-      Script: {instanceID: 3886}
+      Script: {instanceID: 2774}
     - Class: 114
-      Script: {instanceID: 4658}
+      Script: {instanceID: 3048}
     - Class: 114
-      Script: {instanceID: 4762}
+      Script: {instanceID: 3140}
     - Class: 114
-      Script: {instanceID: 4900}
+      Script: {instanceID: 3890}
     - Class: 114
-      Script: {instanceID: 4974}
+      Script: {instanceID: 3930}
     - Class: 114
-      Script: {instanceID: 5402}
+      Script: {instanceID: 4036}
     - Class: 114
-      Script: {instanceID: 5514}
+      Script: {instanceID: 4284}
     - Class: 114
-      Script: {instanceID: 5526}
+      Script: {instanceID: 4662}
     - Class: 114
-      Script: {instanceID: 5662}
+      Script: {instanceID: 4766}
     - Class: 114
-      Script: {instanceID: 5720}
+      Script: {instanceID: 4904}
     - Class: 114
-      Script: {instanceID: 5866}
+      Script: {instanceID: 4978}
     - Class: 114
-      Script: {instanceID: 5966}
+      Script: {instanceID: 5406}
     - Class: 114
-      Script: {instanceID: 5978}
+      Script: {instanceID: 5518}
     - Class: 114
-      Script: {instanceID: 6040}
+      Script: {instanceID: 5530}
     - Class: 114
-      Script: {instanceID: 6230}
+      Script: {instanceID: 5666}
     - Class: 114
-      Script: {instanceID: 6386}
+      Script: {instanceID: 5724}
     - Class: 114
-      Script: {instanceID: 6536}
+      Script: {instanceID: 5870}
     - Class: 114
-      Script: {instanceID: 6808}
+      Script: {instanceID: 5970}
     - Class: 114
-      Script: {instanceID: 6850}
+      Script: {instanceID: 5982}
     - Class: 114
-      Script: {instanceID: 7136}
+      Script: {instanceID: 6044}
     - Class: 114
-      Script: {instanceID: 7256}
+      Script: {instanceID: 6092}
+    - Class: 114
+      Script: {instanceID: 6234}
+    - Class: 114
+      Script: {instanceID: 6390}
+    - Class: 114
+      Script: {instanceID: 6540}
+    - Class: 114
+      Script: {instanceID: 6812}
+    - Class: 114
+      Script: {instanceID: 6854}
+    - Class: 114
+      Script: {instanceID: 7140}
+    - Class: 114
+      Script: {instanceID: 7260}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -237,8 +255,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
-    - Class: 49
-      Script: {instanceID: 0}
     - Class: 54
       Script: {instanceID: 0}
     - Class: 65
@@ -252,44 +268,20 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1584}
+      Script: {instanceID: 2568}
     - Class: 114
-      Script: {instanceID: 2156}
+      Script: {instanceID: 5406}
     - Class: 114
-      Script: {instanceID: 2566}
+      Script: {instanceID: 5530}
     - Class: 114
-      Script: {instanceID: 3044}
+      Script: {instanceID: 5970}
     - Class: 114
-      Script: {instanceID: 3926}
+      Script: {instanceID: 5982}
     - Class: 114
-      Script: {instanceID: 4032}
+      Script: {instanceID: 6812}
     - Class: 114
-      Script: {instanceID: 4280}
-    - Class: 114
-      Script: {instanceID: 4974}
-    - Class: 114
-      Script: {instanceID: 5402}
-    - Class: 114
-      Script: {instanceID: 5526}
-    - Class: 114
-      Script: {instanceID: 5662}
-    - Class: 114
-      Script: {instanceID: 5720}
-    - Class: 114
-      Script: {instanceID: 5966}
-    - Class: 114
-      Script: {instanceID: 5978}
-    - Class: 114
-      Script: {instanceID: 6088}
-    - Class: 114
-      Script: {instanceID: 6386}
-    - Class: 114
-      Script: {instanceID: 6808}
-    - Class: 114
-      Script: {instanceID: 7256}
+      Script: {instanceID: 7260}
     - Class: 115
-      Script: {instanceID: 0}
-    - Class: 128
       Script: {instanceID: 0}
     - Class: 136
       Script: {instanceID: 0}
@@ -298,12 +290,6 @@ ScriptsOnlyBuild:
     - Class: 157
       Script: {instanceID: 0}
     - Class: 196
-      Script: {instanceID: 0}
-    - Class: 213
-      Script: {instanceID: 0}
-    - Class: 222
-      Script: {instanceID: 0}
-    - Class: 224
       Script: {instanceID: 0}
   scriptHashData:
   - hash:
@@ -324,6 +310,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Image
+  - hash:
+      serializedVersion: 2
+      Hash: 545fad00e2f11e547b36aabacd39606e
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: BedController
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -480,6 +472,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: InventoryWindow
+  - hash:
+      serializedVersion: 2
+      Hash: fc6fdb5315cf0743cba9892f6f59c42c
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: StatusBarsController
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -1112,7 +1110,7 @@ ScriptsOnlyBuild:
     className: TextContainer
   - hash:
       serializedVersion: 2
-      Hash: 648115b5d103028cf7790b9e58ceeacf
+      Hash: 173f7a88f9746a0535959a7e1d86458d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GlobalObjects
@@ -1394,6 +1392,6 @@ ScriptsOnlyBuild:
     className: UnityOnSliderValueChangedMessageListener
   platform: 19
   scenePathNames:
-  - Assets/Scenes/SampleScene.unity
   - Assets/Scenes/BunkerScene.unity
-  playerPath: D:/Bilds/GameJam.exe
+  - Assets/Scenes/SampleScene.unity
+  playerPath: D:/UnityProjects/GameJam/12134/GameJam.exe
