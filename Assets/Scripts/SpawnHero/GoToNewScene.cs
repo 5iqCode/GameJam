@@ -26,11 +26,11 @@ public class GoToNewScene : MonoBehaviour
             if (SceneManager.GetActiveScene().name == "BunkerScene")
             {
                 SceneManager.LoadScene("SampleScene");
-                _globalObjects.WasWalk = true;
             }
             else
             {
                 SceneManager.LoadScene("BunkerScene");
+
             }
         }
             

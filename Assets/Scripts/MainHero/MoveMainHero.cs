@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MoveMainHero : MonoBehaviour
@@ -24,9 +25,16 @@ public class MoveMainHero : MonoBehaviour
 
     private bool _canRun = true;
 
+    private bool _canJump = true;
+
     private void Start()
     {
         _enduranceController = GameObject.Find("EnduranceController").GetComponent<EnduranceController>();
+
+        if (SceneManager.GetActiveScene().name == "BunkerScene")
+        {
+            _canJump = false;
+        }
     }
 
     private void Update()
@@ -69,7 +77,7 @@ public class MoveMainHero : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && isGrounded && _canJump)
         {
             if (_enduranceValue > 15)
             {

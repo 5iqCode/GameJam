@@ -10,6 +10,8 @@ public class InventoryManager : MonoBehaviour
 
     public List<Item> _ChestItems = new List<Item>();
 
+    public List<Item> _SpawnedItemsInMap = new List<Item>();
+
     private void Awake()
     {
         for (int i = 0; i < _StartItems.Count; i++)

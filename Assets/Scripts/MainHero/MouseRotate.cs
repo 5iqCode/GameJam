@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MouseRotate : MonoBehaviour
 {
-    [SerializeField] private float mouseSensitivity;
+    public float mouseSensitivity = 500;
     [SerializeField] private Transform _mainHeroBody;
 
     private float xRotation = 0f;
@@ -24,5 +24,10 @@ public class MouseRotate : MonoBehaviour
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
         _mainHeroBody.Rotate(Vector3.up * mouseX);
+    }
+
+    public void ChangeMouseSencivity(float value)
+    {
+        mouseSensitivity = value;
     }
 }

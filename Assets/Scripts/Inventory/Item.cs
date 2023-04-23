@@ -17,3 +17,5 @@ public class Item : ScriptableObject
 
     public GameObject RelatedItem;
 }
+
+

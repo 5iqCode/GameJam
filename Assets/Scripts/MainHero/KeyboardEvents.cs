@@ -14,6 +14,8 @@ public class KeyboardEvents : MonoBehaviour
     private GameObject _Chest;
     private GameObject _Bed;
 
+    private SpawnItemsCotroller _spawnItemsCotroller;
+
     //TakeBlock
     [SerializeField] private float _takeDistance;// дальность поднятия блока
     private GameObject[] _CanTakeBlocks;
@@ -29,6 +31,7 @@ public class KeyboardEvents : MonoBehaviour
 
     private void Start()
     {
+        _spawnItemsCotroller = GameObject.Find("SpawnItemController").GetComponent<SpawnItemsCotroller>();
         _inventoryTransform = GameObject.Find("Inventory").transform;
         _GlobalObjects = GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>();
         _inventoryWindow = _GlobalObjects.InventoryWindow;
@@ -78,15 +81,30 @@ public class KeyboardEvents : MonoBehaviour
             }
         }
     }
-    
+    [SerializeField] private GameObject _escCanvas;
+    private GameObject _tempEscCanvas;
     private void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.CapsLock))
+        {
+            mouseRotate.enabled = !mouseRotate.enabled;
+            if (_tempEscCanvas == null)
+            {
+                _tempEscCanvas = Instantiate(_escCanvas);
+                Cursor.lockState = CursorLockMode.None;
+            }
+            else
+            {
+                Destroy(_tempEscCanvas);
+                _tempEscCanvas = null;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+               
+        }
 
-        if (Input.GetKeyDown(KeyCode.I)|| Input.GetKeyDown(KeyCode.Tab))
+        if ((Input.GetKeyDown(KeyCode.I)|| Input.GetKeyDown(KeyCode.Tab))&& (SceneManager.GetActiveScene().name == "SampleScene"))
         {
             OpenCloseInventory();
-
         }
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -100,14 +118,32 @@ public class KeyboardEvents : MonoBehaviour
             float _distlivingChest = Vector3.Distance(_Chest.transform.position, transform.position);
             float _distBed = Vector3.Distance(_Bed.transform.position, transform.position);
 
-            if ((_takeDistance > _distlivingCorpse || _takeDistance > _distlivingChest|| _takeDistance>_distBed)&&_inventoryWindow.activeSelf==false)
+            if ((Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.Tab)) && (_takeDistance < _distlivingCorpse && _takeDistance < _distlivingChest && _takeDistance < _distBed))
             {
+                OpenCloseInventory();
+            }
+
+            if ((_takeDistance > _distlivingCorpse || _takeDistance > _distlivingChest|| _takeDistance>_distBed))
+            {
+                if ((_inventoryWindow.activeSelf)&&(!_inventoryChest.activeSelf))
+                {
+                    _inventoryWindow.SetActive(false);
+                    Cursor.lockState = CursorLockMode.Locked;
+                    mouseRotate.enabled = !mouseRotate.enabled;
+                }
                 if (_tempTextPressE == null)
                 {
                     _tempTextPressE = Instantiate(_textPressE, _inventoryTransform);
                     if (_takeDistance > _distlivingCorpse)
                     {
-                        _tempTextPressE.GetComponent<TMP_Text>().text = "press E to feed";
+                        if (_GlobalObjects.LivingCorpseIsDead)
+                        {
+                            _tempTextPressE.GetComponent<TMP_Text>().text = "there's nothing to help her";
+                        }
+                        else
+                        {
+                            _tempTextPressE.GetComponent<TMP_Text>().text = "press E to feed";
+                        }
                     } else if(_takeDistance > _distlivingChest)
                     {
                         _tempTextPressE.GetComponent<TMP_Text>().text = "press E to open chest";
@@ -130,8 +166,11 @@ public class KeyboardEvents : MonoBehaviour
             {
                 if (_takeDistance > _distlivingCorpse)
                 {
-                    _GlobalObjects.IsGiveEatToLivingCorpse = !_GlobalObjects.IsGiveEatToLivingCorpse;
-                    OpenCloseInventory();
+                    if (_GlobalObjects.LivingCorpseIsDead == false)
+                    {
+                        _GlobalObjects.IsGiveEatToLivingCorpse = !_GlobalObjects.IsGiveEatToLivingCorpse;
+                        OpenCloseInventory();
+                    }
                 }
                 if (_takeDistance > _distlivingChest)
                 {
@@ -175,10 +214,11 @@ public class KeyboardEvents : MonoBehaviour
                 InventoryManager inventoryManager = _inventoryWindow.GetComponent<InventoryManager>();
                 if (inventoryManager._InventoryItems.Count>=4)
                 {
-                    CantTakeSoMuch(_closestObject);
+                    Debug.Log("нет места");
                 }
                 else
                 {
+                    _spawnItemsCotroller.RemoveItem(_closestObject.GetComponent<ItemInWorldObj>().id);
                     Item temp = Resources.Load<Item>("Inventory/" + _closestObject.name);
                     inventoryManager.AddItem(temp);
                     _inventoryWindow.GetComponent<InventoryWindow>().Redraw();
@@ -186,11 +226,5 @@ public class KeyboardEvents : MonoBehaviour
                 }
             }
         }
-    }
-    [SerializeField] private GameObject _canvasCantTake;
-    private void CantTakeSoMuch(GameObject _closedObj)
-    {
-        GameObject gameObject = Instantiate(_canvasCantTake, _closedObj.transform);
-
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SpawnMainHero : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class SpawnMainHero : MonoBehaviour
 
     private void Awake()
     {
-        Instantiate(_mainHero, transform.position, Quaternion.identity);
+        GameObject[] _spawnPositions = GameObject.FindGameObjectsWithTag("Respawn");
+        Instantiate(_mainHero, _spawnPositions[Random.Range(0,_spawnPositions.Length)].transform.position, Quaternion.identity);
     }
 }
