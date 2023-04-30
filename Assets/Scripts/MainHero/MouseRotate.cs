@@ -11,6 +11,7 @@ public class MouseRotate : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        mouseSensitivity = GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>().mouseSensitivity;
     }
 
     void Update()

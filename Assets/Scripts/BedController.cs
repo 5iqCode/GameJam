@@ -48,6 +48,7 @@ public class BedController : MonoBehaviour
     private void GoSleep()
     {
         _globalObjects.DaysPass++;
+        GameObject.Find("SpawnItemController").GetComponent<SpawnItemsCotroller>().ClearList();
         _dayPassTransform = GameObject.FindGameObjectWithTag("DontDestroyInterface").GetComponent<Transform>();
 
         _darkScreenTransform = GameObject.Find("CanvasForDarkScreen").transform;
@@ -55,7 +56,7 @@ public class BedController : MonoBehaviour
 
         if (ReturnedValueSliders[0]<1)
         {
-            Debug.Log("ÏÎÇÄÐÎÂËßÞ! ÂÛ ÓÌÅÐËÈ!");
+            GameObject.Find("DeadController").GetComponent<EndGame>().EndGameTrigger();
         }
         else
         {

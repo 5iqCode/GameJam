@@ -41,6 +41,7 @@ public class TimerScript : MonoBehaviour
 
    public IEnumerator TimeTick(float _startedSeconds)
     {
+        yield return new WaitForSeconds(4);
         while (_timePassed > 0)
         {
             _timePassed--;
@@ -51,5 +52,6 @@ public class TimerScript : MonoBehaviour
 
             yield return new WaitForSecondsRealtime(1);
         }
+        GameObject.Find("DeadController").GetComponent<EndGame>().EndGameTrigger();
     }
 }

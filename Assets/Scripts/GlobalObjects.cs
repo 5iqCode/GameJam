@@ -21,5 +21,7 @@ public class GlobalObjects : MonoBehaviour
 
     public bool LivingCorpseIsDead=false;
 
-    
+    public float mouseSensitivity = 500;
+
+
 }

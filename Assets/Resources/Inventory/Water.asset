@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Water
   m_EditorClassIdentifier: 
   Name: Water
-  IconInInventory: {fileID: 21300000, guid: 0ac55f9f886d827408c102bdf33c5ff7, type: 3}
+  IconInInventory: {fileID: -1871949783, guid: 17134921fc2207049ab9ac197d32fded, type: 3}
   CanEat: 1
   HungryIfEat: 5
   WaterIfEat: 80
   HPIfEat: 5
-  RelatedItem: {fileID: 6773062240216763857, guid: e3671deb500c9fc4491cebb5f1f1dfc7, type: 3}
+  RelatedItem: {fileID: 8936482924319888022, guid: b101dec42267f9c4f99cea37d41219ad, type: 3}

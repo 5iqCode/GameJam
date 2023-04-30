@@ -134,7 +134,14 @@ private Transform _mainHeroTransform;
 
         GameObject _spawnedObj = Instantiate(temp.RelatedItem,_mainHeroTransform.position + _mainHeroTransform.forward, Quaternion.Euler(Random.Range(0,360), Random.Range(0, 360), Random.Range(0, 360)));
         _spawnedObj.name = temp.name;
-        _spawnedObj.GetComponent<Rigidbody>().AddForce(_mainHeroTransform.forward*_forceValue);
+        try
+        {
+            _spawnedObj.GetComponent<Rigidbody>().AddForce(_mainHeroTransform.forward * _forceValue);
+        }
+        catch
+        {
+            _spawnedObj.GetComponentInChildren<Rigidbody>().AddForce(_mainHeroTransform.forward * _forceValue);
+        }
         
         _inventoryManager._InventoryItems.Remove(temp);
         _inventoryWindow.Redraw();

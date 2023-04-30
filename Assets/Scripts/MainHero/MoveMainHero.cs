@@ -31,6 +31,8 @@ public class MoveMainHero : MonoBehaviour
     {
         _enduranceController = GameObject.Find("EnduranceController").GetComponent<EnduranceController>();
 
+        gameObject.GetComponent<AudioSource>().volume = GameObject.Find("MusicController").GetComponent<DontDestroyInLoadMusic>().InterfaceVolume;
+
         if (SceneManager.GetActiveScene().name == "BunkerScene")
         {
             _canJump = false;
@@ -50,9 +52,21 @@ public class MoveMainHero : MonoBehaviour
 
         Vector3 _movement = _transformMainHero.right * moveHorizontal + _transformMainHero.forward * moveVertical;
 
+        
+
+        if (isGrounded && _movement != Vector3.zero)
+        {
+            if(!gameObject.GetComponent<AudioSource>().isPlaying)
+                gameObject.GetComponent<AudioSource>().Play();
+        }
+        else
+        {
+            gameObject.GetComponent<AudioSource>().Stop();
+        }
 
         if ((Input.GetKey(KeyCode.LeftShift))&& isGrounded)
         {
+            gameObject.GetComponent<AudioSource>().pitch = 1.5f;
             if (_canRun == true)
             {
                 _controller.Move(_movement * _speedUp * Time.deltaTime);
@@ -67,6 +81,7 @@ public class MoveMainHero : MonoBehaviour
         }
         else
         {
+            gameObject.GetComponent<AudioSource>().pitch = 1f;
             if (_canRun)
             {
                 _controller.Move(_movement * _speed * Time.deltaTime);

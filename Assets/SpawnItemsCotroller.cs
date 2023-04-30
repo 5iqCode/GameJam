@@ -14,7 +14,7 @@ public class SpawnItemsCotroller : MonoBehaviour
     [SerializeField] private GameObject TushenkainWorld;
     [SerializeField] private GameObject WaterinWorld;
 
-    public int _countItemsInWorld = 12;
+    public int _countItemsInWorld = 100;
 
 
     private void OnLevelWasLoaded(int level)
@@ -25,9 +25,9 @@ public class SpawnItemsCotroller : MonoBehaviour
            
             if (_globalObjects.WasWalk == false)
             {
-                if (_countItemsInWorld > 5)
+                if (_countItemsInWorld > 25)
                 {
-                    _countItemsInWorld--;
+                    _countItemsInWorld-=20;
                 }
                 FirstDaySpawn();
             }
@@ -113,6 +113,11 @@ public Vector3 positionSpawn { get; set; }
                 break;
             }
         }
+    }
+
+    public void ClearList()
+    {
+        _ListItemsOnDay.Clear();
     }
 }
 

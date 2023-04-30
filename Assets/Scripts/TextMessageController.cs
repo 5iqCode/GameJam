@@ -43,17 +43,17 @@ public class TextMessageController : MonoBehaviour
             if ((_HungrySlider.value < 20) && (_WaterSlider.value < 20))
             {
                 _tempText = Instantiate(_HungryWaterText, _interfaceTransform);
-                _tempText.GetComponent<TMP_Text>().text = "бш унвхре йсьюж щмд охря";
+                _tempText.GetComponent<TMP_Text>().text = "I am very thirsty and hungry";
             }
             else if (_WaterSlider.value < 20)
             {
                 _tempText = Instantiate(_HungryWaterText, _interfaceTransform);
-                _tempText.GetComponent<TMP_Text>().text = "бш унвхре охря";
+                _tempText.GetComponent<TMP_Text>().text = "I want at least a sip of water";
             }
             else
             {
                 _tempText = Instantiate(_HungryWaterText, _interfaceTransform);
-                _tempText.GetComponent<TMP_Text>().text = "бш унвхре йсьюж";
+                _tempText.GetComponent<TMP_Text>().text = "I haven't had food in my stomach for so long";
             }
             yield return new WaitForSeconds(2);
 

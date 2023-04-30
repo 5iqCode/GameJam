@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Medkit
   m_EditorClassIdentifier: 
   Name: Medkit
-  IconInInventory: {fileID: 21300000, guid: 4a231ba0e81e63849a8f985c228e8acd, type: 3}
+  IconInInventory: {fileID: 1775088526, guid: 17134921fc2207049ab9ac197d32fded, type: 3}
   CanEat: 1
   HungryIfEat: 0
   WaterIfEat: 0

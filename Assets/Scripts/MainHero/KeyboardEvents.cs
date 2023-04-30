@@ -85,7 +85,7 @@ public class KeyboardEvents : MonoBehaviour
     private GameObject _tempEscCanvas;
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.CapsLock))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             mouseRotate.enabled = !mouseRotate.enabled;
             if (_tempEscCanvas == null)
@@ -125,7 +125,7 @@ public class KeyboardEvents : MonoBehaviour
 
             if ((_takeDistance > _distlivingCorpse || _takeDistance > _distlivingChest|| _takeDistance>_distBed))
             {
-                if ((_inventoryWindow.activeSelf)&&(!_inventoryChest.activeSelf))
+                if ((_inventoryWindow.activeSelf)&&(!_inventoryChest.activeSelf)&&(_takeDistance < _distlivingCorpse))
                 {
                     _inventoryWindow.SetActive(false);
                     Cursor.lockState = CursorLockMode.Locked;
